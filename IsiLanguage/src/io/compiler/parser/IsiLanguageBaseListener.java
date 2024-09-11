@@ -11,8 +11,11 @@ package io.compiler.parser;
 	import io.compiler.ast.CommandEscrita;
 	import io.compiler.ast.CommandAtribuicao;
 	import io.compiler.ast.CommandDecisao;
+	import io.compiler.ast.CommandLoopFor;
+	import io.compiler.ast.CommandLoopWhile;
 	import java.util.ArrayList;
 	import java.util.Stack;
+	import java.util.logging.*;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -151,6 +154,42 @@ public class IsiLanguageBaseListener implements IsiLanguageListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterWhileC(IsiLanguageParser.WhileCContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitWhileC(IsiLanguageParser.WhileCContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterForC(IsiLanguageParser.ForCContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitForC(IsiLanguageParser.ForCContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIncDec(IsiLanguageParser.IncDecContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIncDec(IsiLanguageParser.IncDecContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterExpr(IsiLanguageParser.ExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -163,13 +202,13 @@ public class IsiLanguageBaseListener implements IsiLanguageListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTermo(IsiLanguageParser.TermoContext ctx) { }
+	@Override public void enterToken(IsiLanguageParser.TokenContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTermo(IsiLanguageParser.TermoContext ctx) { }
+	@Override public void exitToken(IsiLanguageParser.TokenContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

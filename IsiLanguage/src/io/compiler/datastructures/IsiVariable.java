@@ -2,8 +2,11 @@ package io.compiler.datastructures;
 
 public class IsiVariable extends IsiSymbol {
 	
-	public static final int NUMBER=0;
-	public static final int TEXT  =1;
+	public static final int INT = 0;
+	public static final int TEXT = 1;
+	public static final int DOUBLE = 2;
+	public static final int BOOLEAN = 3;
+	public static final int CHAR = 4;
 	
 	private int type;
 	private String value;
@@ -36,16 +39,51 @@ public class IsiVariable extends IsiSymbol {
 	}
 	
 	public String generateJavaCode() {
-       String str;
-       if (type == NUMBER) {
-    	   str = "double ";
-       }
-       else {
-    	   str = "String ";
-       }
-       return str + " "+super.name+";";
+       return String.format("    %s %s;\n", typeCode(), super.name);
 	}
 	
+	private String typeCode() {
+		switch (this.type) {
+			case INT: 
+				return "int";
+				
+			case TEXT:	
+				return "String";
+			
+			case DOUBLE: 
+				return "double";
+			
+			case BOOLEAN: 
+				return "boolean";
+				
+			case CHAR:
+				return "char";
+			
+			default: 
+				throw new RuntimeException("Type not defined");
+		}
+	}
 	
+	public static String getIsiType(int type) {
+		switch (type) {
+			case INT: 
+				return "integer";
+				
+			case TEXT:	
+				return "text";
+			
+			case DOUBLE: 
+				return "double";
+			
+			case BOOLEAN: 
+				return "boolean";
+				
+			case CHAR:
+				return "char";
+			
+			default: 
+				throw new RuntimeException("Type not defined");
+		}
+	}
 
 }

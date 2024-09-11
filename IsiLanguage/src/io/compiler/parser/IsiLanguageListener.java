@@ -11,8 +11,11 @@ package io.compiler.parser;
 	import io.compiler.ast.CommandEscrita;
 	import io.compiler.ast.CommandAtribuicao;
 	import io.compiler.ast.CommandDecisao;
+	import io.compiler.ast.CommandLoopFor;
+	import io.compiler.ast.CommandLoopWhile;
 	import java.util.ArrayList;
 	import java.util.Stack;
+	import java.util.logging.*;
 
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -122,6 +125,36 @@ public interface IsiLanguageListener extends ParseTreeListener {
 	 */
 	void exitCmdselecao(IsiLanguageParser.CmdselecaoContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link IsiLanguageParser#whileC}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhileC(IsiLanguageParser.WhileCContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link IsiLanguageParser#whileC}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhileC(IsiLanguageParser.WhileCContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link IsiLanguageParser#forC}.
+	 * @param ctx the parse tree
+	 */
+	void enterForC(IsiLanguageParser.ForCContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link IsiLanguageParser#forC}.
+	 * @param ctx the parse tree
+	 */
+	void exitForC(IsiLanguageParser.ForCContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link IsiLanguageParser#incDec}.
+	 * @param ctx the parse tree
+	 */
+	void enterIncDec(IsiLanguageParser.IncDecContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link IsiLanguageParser#incDec}.
+	 * @param ctx the parse tree
+	 */
+	void exitIncDec(IsiLanguageParser.IncDecContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link IsiLanguageParser#expr}.
 	 * @param ctx the parse tree
 	 */
@@ -132,13 +165,13 @@ public interface IsiLanguageListener extends ParseTreeListener {
 	 */
 	void exitExpr(IsiLanguageParser.ExprContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link IsiLanguageParser#termo}.
+	 * Enter a parse tree produced by {@link IsiLanguageParser#token}.
 	 * @param ctx the parse tree
 	 */
-	void enterTermo(IsiLanguageParser.TermoContext ctx);
+	void enterToken(IsiLanguageParser.TokenContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link IsiLanguageParser#termo}.
+	 * Exit a parse tree produced by {@link IsiLanguageParser#token}.
 	 * @param ctx the parse tree
 	 */
-	void exitTermo(IsiLanguageParser.TermoContext ctx);
+	void exitToken(IsiLanguageParser.TokenContext ctx);
 }

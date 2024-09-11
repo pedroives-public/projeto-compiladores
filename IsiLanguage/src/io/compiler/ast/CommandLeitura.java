@@ -1,6 +1,7 @@
 package io.compiler.ast;
 
 import io.compiler.datastructures.IsiVariable;
+import io.compiler.exceptions.IsiSemanticException;
 
 public class CommandLeitura extends AbstractCommand {
 
@@ -13,12 +14,30 @@ public class CommandLeitura extends AbstractCommand {
 	}
 	@Override
 	public String generateJavaCode() {
-		// TODO Auto-generated method stub
-		return id +"= _key." + (var.getType()==IsiVariable.NUMBER? "nextDouble();": "nextLine();");
+		return String.format("    %s = %s;\n", this.id, getOperationCode());
 	}
-	@Override
-	public String toString() {
-		return "CommandLeitura [id=" + id + "]";
+	
+	private String getOperationCode() throws IsiSemanticException {
+		switch (this.var.getType()) {
+		case IsiVariable.INT:
+			return "_key.nextInt()";
+			
+		case IsiVariable.DOUBLE:
+			return "_key.nextDouble()";
+		
+		case IsiVariable.TEXT:
+			return "_key.nextLine()";
+			
+		case IsiVariable.CHAR:
+			return "_key.next(\".\").charAt(0)";
+			
+		case IsiVariable.BOOLEAN:
+			throw new IsiSemanticException("Not possible read boolean variable");
+		
+		default:
+			throw new RuntimeException("Type not defined");
+			
+	}
 	}
 
 }

@@ -10,7 +10,6 @@ public class IsiSymbolTable {
 	
 	public IsiSymbolTable() {
 		map = new HashMap<String, IsiSymbol>();
-		
 	}
 	
 	public void add(IsiSymbol symbol) {
@@ -23,6 +22,10 @@ public class IsiSymbolTable {
 	
 	public IsiSymbol get(String symbolName) {
 		return map.get(symbolName);
+	}
+	
+	public Set<String> keySet() {
+		return map.keySet();
 	}
 	
 	public ArrayList<IsiSymbol> getAll(){

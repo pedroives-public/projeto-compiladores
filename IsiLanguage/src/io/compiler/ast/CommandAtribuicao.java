@@ -1,26 +1,24 @@
 package io.compiler.ast;
 
-import io.compiler.datastructures.IsiVariable;
-
 public class CommandAtribuicao extends AbstractCommand{
 
 	private String id;
 	private String expr;
+	private boolean isIncrementDecrement = false;
 	
 	public CommandAtribuicao(String id, String expr) {
 		this.id = id;
 		this.expr = expr;
 	}
-	@Override
-	public String generateJavaCode() {
-		// TODO Auto-generated method stub
-		return id + " = "+expr+";";
-	}
-	@Override
-	public String toString() {
-		return "CommandAtribuicao [id=" + id + ", expr=" + expr + "]";
-	}
 	
-	
-
+    public void setIncrementDecrement(boolean isIncDec) {
+        this.isIncrementDecrement = isIncDec;
+    }
+    
+    public String generateJavaCode() {
+        if (isIncrementDecrement) {
+            return "	" + expr + ";\n";
+        }
+        return "	" + id + " = " + expr + ";\n";
+    }
 }
