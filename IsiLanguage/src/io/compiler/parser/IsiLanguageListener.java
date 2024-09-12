@@ -13,6 +13,7 @@ package io.compiler.parser;
 	import io.compiler.ast.CommandDecisao;
 	import io.compiler.ast.CommandLoopFor;
 	import io.compiler.ast.CommandLoopWhile;
+	import io.compiler.ast.CommandLoopDoWhile;
 	import java.util.ArrayList;
 	import java.util.Stack;
 	import java.util.logging.*;
@@ -135,6 +136,16 @@ public interface IsiLanguageListener extends ParseTreeListener {
 	 */
 	void exitWhileC(IsiLanguageParser.WhileCContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link IsiLanguageParser#doWhileC}.
+	 * @param ctx the parse tree
+	 */
+	void enterDoWhileC(IsiLanguageParser.DoWhileCContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link IsiLanguageParser#doWhileC}.
+	 * @param ctx the parse tree
+	 */
+	void exitDoWhileC(IsiLanguageParser.DoWhileCContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link IsiLanguageParser#forC}.
 	 * @param ctx the parse tree
 	 */
@@ -165,13 +176,23 @@ public interface IsiLanguageListener extends ParseTreeListener {
 	 */
 	void exitExpr(IsiLanguageParser.ExprContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link IsiLanguageParser#token}.
+	 * Enter a parse tree produced by {@link IsiLanguageParser#term}.
 	 * @param ctx the parse tree
 	 */
-	void enterToken(IsiLanguageParser.TokenContext ctx);
+	void enterTerm(IsiLanguageParser.TermContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link IsiLanguageParser#token}.
+	 * Exit a parse tree produced by {@link IsiLanguageParser#term}.
 	 * @param ctx the parse tree
 	 */
-	void exitToken(IsiLanguageParser.TokenContext ctx);
+	void exitTerm(IsiLanguageParser.TermContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link IsiLanguageParser#factor}.
+	 * @param ctx the parse tree
+	 */
+	void enterFactor(IsiLanguageParser.FactorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link IsiLanguageParser#factor}.
+	 * @param ctx the parse tree
+	 */
+	void exitFactor(IsiLanguageParser.FactorContext ctx);
 }

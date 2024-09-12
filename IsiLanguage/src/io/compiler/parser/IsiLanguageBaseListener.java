@@ -13,6 +13,7 @@ package io.compiler.parser;
 	import io.compiler.ast.CommandDecisao;
 	import io.compiler.ast.CommandLoopFor;
 	import io.compiler.ast.CommandLoopWhile;
+	import io.compiler.ast.CommandLoopDoWhile;
 	import java.util.ArrayList;
 	import java.util.Stack;
 	import java.util.logging.*;
@@ -166,6 +167,18 @@ public class IsiLanguageBaseListener implements IsiLanguageListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDoWhileC(IsiLanguageParser.DoWhileCContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDoWhileC(IsiLanguageParser.DoWhileCContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterForC(IsiLanguageParser.ForCContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -202,13 +215,25 @@ public class IsiLanguageBaseListener implements IsiLanguageListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterToken(IsiLanguageParser.TokenContext ctx) { }
+	@Override public void enterTerm(IsiLanguageParser.TermContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitToken(IsiLanguageParser.TokenContext ctx) { }
+	@Override public void exitTerm(IsiLanguageParser.TermContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFactor(IsiLanguageParser.FactorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFactor(IsiLanguageParser.FactorContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

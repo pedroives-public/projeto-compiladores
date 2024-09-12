@@ -13,6 +13,7 @@ grammar IsiLanguage;
 	import io.compiler.ast.CommandDecisao;
 	import io.compiler.ast.CommandLoopFor;
 	import io.compiler.ast.CommandLoopWhile;
+	import io.compiler.ast.CommandLoopDoWhile;
 	import java.util.ArrayList;
 	import java.util.Stack;
 	import java.util.logging.*;
@@ -83,14 +84,20 @@ grammar IsiLanguage;
  	public void verificaAtribuicao(){
  		_varName = ((TokenStream) _input).LT(-1).getText();
  		if(((IsiVariable) symbolTable.get(_varName)).getValue() == null){
- 				throw new IsiSemanticException("Variable " + _varName + " not initialized");
+ 				Logger logger  = Logger.getLogger(IsiLanguageParser.class.getName()); 
+  
+        		// Set logger
+        		logger.setLevel(Level.WARNING);
+  
+        		// Warning method 
+        		logger.warning("Variable " + _varName + " not initialized"); 
  		}
  	}
  	
- 	public void atribuiValor(){
- 		//função -> atribuição
- 		((IsiVariable) symbolTable.get(_exprID)).setValue(_exprContent);
- 	}
+	public void atribuiValor(){
+	    IsiVariable var = (IsiVariable) symbolTable.get(_exprID);
+	    var.setValue(_exprContent);
+	}
 
 	public void verificaTipoVariavel(int tipoAtual) {
 		if (_varType == -1) {
@@ -162,7 +169,7 @@ tipo    :	INT_DECL		{	_tipo = IsiVariable.INT;		}
 bloco	: { curThread = new ArrayList<AbstractCommand>(); 
 	        stack.push(curThread);  
           }
-          (cmd | declaravar)+
+          (cmd | decl)+
 		;
 		
 
@@ -172,6 +179,7 @@ cmd		:  cmdleitura
  		|  cmdselecao
  		|  forC  
  		|  whileC
+ 		|  doWhileC
 		;
 		
 cmdleitura	: 'scanf' AP
@@ -265,6 +273,29 @@ whileC    : 	WHILE
 	                    stack.peek().add(cmd);
 	                }
         ;
+        
+doWhileC    :   DO 
+                ACH { curThread = new ArrayList<AbstractCommand>();
+	                  stack.push(curThread);
+	                  conditionStack.push(_exprWhile);
+	                }
+                (cmd | incDec)+ 
+                FCH 
+                WHILE 
+                AP 
+                ID    {    _exprWhile = _input.LT(-1).getText();
+                           verificaAtribuicao();
+                           _exprContent = "";
+                      }
+                OPREL {    _exprWhile += _input.LT(-1).getText();        }
+                expr  {    _exprWhile += _exprContent;        }
+                FP 
+                SC
+                {
+                    CommandLoopDoWhile cmd = new CommandLoopDoWhile(_exprWhile, stack.pop());
+                    stack.peek().add(cmd);
+                }
+            ;
 	
 forC	: 	FOR 
 			AP 
@@ -324,26 +355,25 @@ incDec  : ID        {  verificaID();
           SC        
         ;
 			
-expr		:  	(
+expr	:  	(
 					(	
-						token ( 
-						OP 				{ _exprContent += _input.LT(-1).getText();	}
-						token )*
+						term ( 
+						OP_S { _exprContent += _input.LT(-1).getText();	}
+						term )*
 					)
-				|
-					(
-						BOOLEAN_VAL		{	verificaTipoVariavel(IsiVariable.BOOLEAN);		
-											String booleanInput = _input.LT(-1).getText();
-											_exprContent += booleanInput.equals("false") ? "false" : "true";
-										}
-						| CHAR_VAL		{	verificaTipoVariavel(IsiVariable.CHAR);			
-											_exprContent += _input.LT(-1).getText();
-										}
+			)
+		;
+		
+term	:  	(
+					(	
+						factor ( 
+						OP_M { _exprContent += _input.LT(-1).getText();	}
+						factor )*
 					)
-				)
-			;
+			)
+		;
 			
-token	: 	( 
+factor	: 	( 
 					ID 					{	verificaID();	
 											verificaAtribuicao();
 											int type = ((IsiVariable) symbolTable.get(_input.LT(-1).getText())).getType();
@@ -352,8 +382,18 @@ token	: 	(
 					| INT_VAL			{	verificaTipoVariavel(IsiVariable.INT);			}
 					| DOUBLE_VAL		{	verificaTipoVariavel(IsiVariable.DOUBLE);		}
 					| STRING_VAL		{	verificaTipoVariavel(IsiVariable.TEXT);			}
-				) 						{	_exprContent += _input.LT(-1).getText();	}
-			;
+					| BOOLEAN_VAL {
+				            verificaTipoVariavel(IsiVariable.BOOLEAN);
+				            String booleanInput = _input.LT(-1).getText();
+				            _exprContent += booleanInput.equals("false") ? "false" : "true";
+				        }
+				    | CHAR_VAL {
+				            verificaTipoVariavel(IsiVariable.CHAR);
+				            _exprContent += _input.LT(-1).getText();
+				        }
+					| AP { _exprContent += "("; } expr FP
+				) 	{	_exprContent += _input.LT(-1).getText();	}
+		;
 			
 			
 INT_DECL	: 'integer' 
@@ -397,8 +437,11 @@ FP	: ')'
 SC	: ';'
 	;
 	
-OP	: '+' | '-' | '*' | '/'
-	;
+OP_S	: '+' | '-' 
+		;
+
+OP_M	: '*' | '/'
+		;
 	
 OP_INCREM	:	'++'
 			|	'--'
@@ -430,7 +473,6 @@ ACH  : '{'
      
 FCH  : '}'
      ;
-	 
 	 
 OPREL : '>' | '<' | '>=' | '<=' | '==' | '!='
       ;
