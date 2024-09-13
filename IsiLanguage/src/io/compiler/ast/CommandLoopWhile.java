@@ -21,6 +21,7 @@ public class CommandLoopWhile extends AbstractCommand {
         str.append("    }\n");
         return str.toString();
     }
+
     
     @Override
 	public String toString() {

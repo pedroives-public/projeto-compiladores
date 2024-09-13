@@ -14,16 +14,15 @@ public class CommandLoopFor extends AbstractCommand {
 	
 	@Override
 	public String generateJavaCode() {
-		StringBuilder str = new StringBuilder();
-		
-		str.append("    for (" + this.condition + ") {\n");
-		for (AbstractCommand cmd: cmdList) {
-			str.append("    " + cmd.generateJavaCode());
-		}
-		str.append("    }\n");
-		
-		return str.toString();
+	    StringBuilder str = new StringBuilder();
+	    str.append("    for (" + condition + ") {\n");
+	    for (AbstractCommand cmd : cmdList) {
+	        str.append("    " + cmd.generateJavaCode());
+	    }
+	    str.append("    }\n");
+	    return str.toString();
 	}
+
 	
 	@Override
 	public String toString() {

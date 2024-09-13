@@ -85,5 +85,16 @@ public class IsiVariable extends IsiSymbol {
 				throw new RuntimeException("Type not defined");
 		}
 	}
+	
+	private boolean used = false; // Add this line
+
+    // Getter and Setter for 'used'
+    public boolean isUsed() {
+        return used;
+    }
+
+    public void setUsed(boolean used) {
+        this.used = used;
+    }
 
 }

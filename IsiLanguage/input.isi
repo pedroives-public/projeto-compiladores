@@ -1,11 +1,26 @@
 start
-	integer a, b, c, d;
-	scanf(a);
-	scanf(b);
+    texto t = "ola";
+    booleano b = verdadeiro;
+    caractere c = 'w';
+    
+    inteiro i;
 	
-	c = a + b * 2;
-	d = (a + b) * 2;
-	
-	printf(c);
-	printf(d);
+    para (i = 0; i < 10 && i != 5 || i > 20; i++) {
+        escreva(i);
+        inteiro j = 0;
+    }
+    
+    enquanto (i < 15) {
+    	escreva("foi 1");
+    	i++;
+    }
+    
+    faca {
+    	escreva("foi 2");
+    	i++;
+    } enquanto (i < 20);
+    
+    inteiro a = 10;
+    
+    escreva(a);
 end;

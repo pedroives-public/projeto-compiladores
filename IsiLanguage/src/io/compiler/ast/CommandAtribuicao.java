@@ -15,10 +15,12 @@ public class CommandAtribuicao extends AbstractCommand{
         this.isIncrementDecrement = isIncDec;
     }
     
+    @Override
     public String generateJavaCode() {
         if (isIncrementDecrement) {
-            return "	" + expr + ";\n";
+            return "    " + expr + ";\n";
         }
-        return "	" + id + " = " + expr + ";\n";
+        return "    " + id + " = " + expr + ";\n";
     }
+
 }

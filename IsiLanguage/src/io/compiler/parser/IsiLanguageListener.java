@@ -176,6 +176,66 @@ public interface IsiLanguageListener extends ParseTreeListener {
 	 */
 	void exitExpr(IsiLanguageParser.ExprContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link IsiLanguageParser#logical_or_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterLogical_or_expr(IsiLanguageParser.Logical_or_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link IsiLanguageParser#logical_or_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitLogical_or_expr(IsiLanguageParser.Logical_or_exprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link IsiLanguageParser#logical_and_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterLogical_and_expr(IsiLanguageParser.Logical_and_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link IsiLanguageParser#logical_and_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitLogical_and_expr(IsiLanguageParser.Logical_and_exprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link IsiLanguageParser#logical_not_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterLogical_not_expr(IsiLanguageParser.Logical_not_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link IsiLanguageParser#logical_not_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitLogical_not_expr(IsiLanguageParser.Logical_not_exprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link IsiLanguageParser#equality_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterEquality_expr(IsiLanguageParser.Equality_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link IsiLanguageParser#equality_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitEquality_expr(IsiLanguageParser.Equality_exprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link IsiLanguageParser#relational_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterRelational_expr(IsiLanguageParser.Relational_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link IsiLanguageParser#relational_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitRelational_expr(IsiLanguageParser.Relational_exprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link IsiLanguageParser#arith_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterArith_expr(IsiLanguageParser.Arith_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link IsiLanguageParser#arith_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitArith_expr(IsiLanguageParser.Arith_exprContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link IsiLanguageParser#term}.
 	 * @param ctx the parse tree
 	 */

@@ -9,9 +9,14 @@ public class CommandEscrita extends AbstractCommand {
 	}
 	@Override
 	public String generateJavaCode() {
-		// TODO Auto-generated method stub
-		return String.format("    System.out.println(%s);\n", this.id);
+	    // Check if the id starts and ends with double quotes, indicating a string literal
+	    if (this.id.startsWith("\"") && this.id.endsWith("\"")) {
+	        return String.format("    System.out.println(%s);\n", this.id);
+	    } else {
+	        return String.format("    System.out.println(%s);\n", this.id);
+	    }
 	}
+
 	@Override
 	public String toString() {
 		return "CommandEscrita [id=" + id + "]";

@@ -17,11 +17,12 @@ public class CommandLoopDoWhile extends AbstractCommand {
         StringBuilder str = new StringBuilder();
         str.append("    do {\n");
         for (AbstractCommand cmd : cmdList) {
-            str.append("	" + cmd.generateJavaCode());
+            str.append("    " + cmd.generateJavaCode());
         }
         str.append("    } while (" + condition + ");\n");
         return str.toString();
     }
+
 
     @Override
     public String toString() {
