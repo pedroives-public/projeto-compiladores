@@ -257,6 +257,7 @@ cmdattrib
 cmdselecao
     : IF
       AP
+      { _exprContent = ""; listaFalse = null; }
       expr { _exprDecision = _exprContent; _exprContent = ""; _varType = -1; }
       FP
       ACH { curThread = new ArrayList<AbstractCommand>(); stack.push(curThread); conditionStack.push(_exprDecision); }
@@ -270,6 +271,7 @@ cmdselecao
 whileC
     : WHILE
       AP
+      { _exprContent = ""; }
       expr { _exprWhile = _exprContent; _exprContent = ""; _varType = -1; }
       FP
       ACH { curThread = new ArrayList<AbstractCommand>(); stack.push(curThread); conditionStack.push(_exprWhile); }
@@ -286,6 +288,7 @@ doWhileC
       FCH
       WHILE
       AP
+      { _exprContent = ""; }
       expr { _exprDoWhile = _exprContent; _exprContent = ""; _varType = -1; }
       FP
       SC
@@ -296,12 +299,15 @@ doWhileC
 forC
     : FOR
       AP
+      { _exprContent = ""; }
       ( (tipo ID) { adicionaSymbol(); } | ID { verificaID(); } ) { _exprForInitID = _input.LT(-1).getText(); }
       ATTR { _exprContent = ""; _varType = ((IsiVariable) symbolTable.get(_exprForInitID)).getType(); }
       expr { atribuiValor(); _exprForInit = _exprForInitID + " = " + _exprContent; }
       SC
+      { _exprContent = ""; }
       expr { _exprForCondition = _exprContent; _exprContent = ""; _varType = -1; }
       SC
+      { _exprContent = ""; }
       (ID { verificaID(); } OP_INCREM { _exprForUpdate = _input.LT(-2).getText() + _input.LT(-1).getText(); }
        | ID { verificaID(); } ATTR { _exprContent = ""; _varType = ((IsiVariable) symbolTable.get(_input.LT(-1).getText())).getType(); } expr { _exprForUpdate = _input.LT(-4).getText() + " = " + _exprContent; }
       )
@@ -326,9 +332,9 @@ incDec
 
 			
 expr
-    : { _exprContent = ""; }
-      logical_or_expr
+    : logical_or_expr
     ;
+
 
 
 logical_or_expr

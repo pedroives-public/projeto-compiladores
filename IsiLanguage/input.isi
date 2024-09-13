@@ -1,26 +1,163 @@
 start
-    texto t = "ola";
-    booleano b = verdadeiro;
-    caractere c = 'w';
-    
-    inteiro i;
+	escreva("Itens Obrigatórios");
+	escreva("1. Possui 2 tipos de variáveis");
 	
-    para (i = 0; i < 10 && i != 5 || i > 20; i++) {
-        escreva(i);
-        inteiro j = 0;
+	inteiro i = 5;
+	escreva("\nInteiro: ");
+	escreva(i);
+	
+	real r = 3.14;
+	escreva("\nReal: ");
+	escreva(r);
+	
+    booleano flag = verdadeiro;
+	escreva("\nBooleano: ");
+	escreva(flag);
+	
+    caractere ch = 'O';
+	escreva("\nCaractere: ");
+	escreva(ch);
+	
+    texto t = "Olá, Mundo!";
+	escreva("\nTexto: ");
+	escreva(t);
+	
+	escreva("\n2. Possui a estrutura If.. else");
+	
+	escreva("\n2.1 Apenas If");
+	
+    se (i < 20) {
+    	escreva("i é menor que 20");
+    }
+	
+    se (i >= 5) {
+    	escreva("\ni é maior ou igual a 5");
+    }
+	
+    se (i <= 5) {
+    	escreva("\ni é menor ou igual a 5");
+    }
+	
+    se (i == 5) {
+    	escreva("\ni é igual a 5");
+    }
+	
+    se (i != 5) {
+    	escreva("\ni é diferente de 5");
+    }
+	
+    se (i != 6) {
+    	escreva("\ni é diferente de 6");
     }
     
-    enquanto (i < 15) {
-    	escreva("foi 1");
+    escreva("\n2.2 If.. else");
+    
+    se (i > 10) {
+    	escreva("i é maior que 10");
+    } senao {
+    	escreva("i não é maior que 10");
+    }
+    
+    escreva("\n3. Possui estrutura de controle while/do while");
+    
+    escreva("\n3.1 while");
+    
+    i = 0;
+    
+    enquanto (i < 5) {
+    	escreva("O valor de i é: ");
+    	escreva(i);
+    	escreva("");
     	i++;
     }
+    
+    escreva("\n3.2 do while");
+    
+    i = 0;
     
     faca {
-    	escreva("foi 2");
+    	escreva("O valor de i é: ");
+    	escreva(i);
+    	escreva("");
     	i++;
-    } enquanto (i < 20);
+    }
+    enquanto (i < 5);
     
-    inteiro a = 10;
+    escreva("\n3.3 for");
     
-    escreva(a);
+    para (i = 0; i < 5; i++) {
+    	escreva("O valor de i é: ");
+    	escreva(i);
+    	escreva("");
+    }
+    
+    escreva("\n4. Operações Aritméticas executadas corretamente");
+    
+    inteiro a = 1, b = 2, c = 3, d = 4;
+    
+    inteiro soma = a + b;
+    escreva("Soma: ");
+    escreva(soma);
+    
+    inteiro subtracao = c - a;
+    escreva("\nSubtração: ");
+    escreva(subtracao);
+    
+    inteiro multiplicacao = b * c;
+    escreva("\nMultiplicação: ");
+    escreva(multiplicacao);
+    
+    inteiro divisao = d / b;
+    escreva("\nDivisão: ");
+    escreva(divisao);
+    
+    inteiro misto = a + b * (d - a) + b / c;
+    escreva("\nMúltiplas operações em uma mesma expressão: ");
+    escreva(misto);
+    
+    escreva("\n5. Atribuições realizadas corretamente: já testado nos itens anteriores");
+    
+    escreva("\n6. Possui operações de Entrada e Saída");
+    
+    texto entradaUsuario;
+    leia(entradaUsuario);
+    escreva(entradaUsuario);
+    
+    escreva("\n7. Aceita números decimais: já testado nos itens anteriores");
+    
+    escreva("\n8. Verificar se a variável já foi previamente declarada");
+    
+    
+    escreva("\n9. Verificar se a variável foi declarada e não foi usada");
+    
+    inteiro variavelQueNaoSeraUtilizada = 2;
+    
+    escreva("\n10. Verificar se uma variável está sendo usada sem ter valor inicial");
+    
+    inteiro variavelSemValorInicial = 0;
+    
+    inteiro testeVariavelSemValorInicial = 2 + variavelSemValorInicial;
+    escreva(testeVariavelSemValorInicial);
+    
+    escreva("\nItens Opcionais");
+    escreva("\n3. Inserção de Operadores lógicos");
+    
+    i = 5;
+    
+    se (i > 3 && i < 6) {
+    	escreva("\ni é maior que 3 e menor que 6");
+    }
+    
+    se (i < 3 || i < 5) {
+    	escreva("\ni é menor que 3 e/ou menor que 5");
+    } senao {
+    	escreva("\ni não é menor que 3 e i não é menor que 5");
+    }
+    
+    booleano falseFlag = falso;
+    
+    se (!falseFlag) {
+    	escreva("Verdadeiro!");
+    }
+    
 end;
